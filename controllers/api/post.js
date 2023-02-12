@@ -6,7 +6,7 @@ router.post('/', withAuth, async (req, res) => {
     const body = req.body;
 
     try {
-        const newPost = await Post.create({...body, userId: req.session.userId });
+        const newPost = await Post.create({...body, userId: req.session.user_id });
         res.json(newPost);
     } catch (err) {
         res.status(500).json(err);
@@ -33,7 +33,7 @@ router.put('/:id', withAuth, async (req, res) => {
   
   router.delete('/:id', withAuth, async (req, res) => {
     try {
-      const [affectedRows] = Post.destroy({
+      const affectedRows = await Post.destroy({
         where: {
           id: req.params.id,
         },
@@ -45,6 +45,7 @@ router.put('/:id', withAuth, async (req, res) => {
         res.status(404).end();
       }
     } catch (err) {
+      console.error (err)
       res.status(500).json(err);
     }
   });

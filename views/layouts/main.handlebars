@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Blog</title>
   <link rel="stylesheet" href="/css/jass.css">
@@ -12,30 +12,28 @@
 <body>
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        <span role="img" aria-label="money">💸</span>
-        <a href="/">Tech Blog</a>
-      </h1>
-      <nav>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/profile">profile</a> |
-        <button class="no-button" id="logout">logout</button>
-        {{else}}
-        <a href="/login">login</a>
-        {{/if}}
+      <h1><a href="/">Tech Blog</a></h1>
+      <nav class="navbar">
+        <ul>
+          <li class="li-inline nav-item"><a href="/">Home</a></li>
+          {{#if logged_in}}
+          <li class="li-inline nav-item"><a href="/dashboard">Dashboard</a></li>
+          <li class="li-inline nav-item"><button class="no-button" id="logout">logout</button></li>
+          {{else}}
+          <li class="li-inline nav-item"><a href="/login">Login</a></li>
+          {{/if}}
+        </ul>
       </nav>
     </header>
+
     <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
-      {{{ body }}}
+      {{{body}}}
     </main>
-    <footer>
-      
+
+    <footer class="flex-row justify-center">
+      &copy; Tech Blog
     </footer>
   </div>
-
-  <!-- Render script for logged in users only -->
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
